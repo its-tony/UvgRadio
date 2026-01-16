@@ -1,7 +1,7 @@
 /**
  * Interfaz que define el comportamiento básico de un radio de carro.
  *
- * <p>Permite encender/apagar, avanzar estación, guardar/cargar estaciones
+ * <p>Permite encender o apagar, avanzar estación, guardar/cargar estaciones
  * en 12 botones y cambiar entre bandas AM y FM.</p>
  */
 public interface Radio {
@@ -15,8 +15,8 @@ public interface Radio {
   /**
    * Avanza a la siguiente estación dependiendo de la banda actual.
    *
-   * <p>AM avanza de 10 en 10 (530..1610). FM avanza de 0.2 en 0.2 (87.9..107.9).
-   * Al pasar el máximo, vuelve al mínimo.</p>
+   * <p>AM avanza de 10 en 10 (530 hasta 1610). FM avanza de 0.2 en 0.2 (87.9 hasta 107.9).
+   * Al pasar el máximo, vuelve al mínimo :D </p>
    */
   void avanzarEstacion();
 
@@ -47,7 +47,6 @@ public interface Radio {
 
   /**
    * Cambia la banda a FM.
-   *
    * <p>Si el radio está apagado, no realiza cambios.</p>
    */
   void cambiarFM();

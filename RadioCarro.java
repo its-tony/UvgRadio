@@ -6,7 +6,7 @@
  */
 public class RadioCarro implements Radio {
 
-  // ===== Constantes de AM =====
+  // AM
   /** Mínimo permitido para AM. */
   private static final int AM_MIN = 530;
 
@@ -16,7 +16,7 @@ public class RadioCarro implements Radio {
   /** Paso de avance para AM. */
   private static final int AM_STEP = 10;
 
-  // ===== Constantes de FM =====
+  // FM
   /** Mínimo permitido para FM. */
   private static final double FM_MIN = 87.9;
 
@@ -26,7 +26,7 @@ public class RadioCarro implements Radio {
   /** Paso de avance para FM. */
   private static final double FM_STEP = 0.2;
 
-  // ===== Estado =====
+  // ESTADO INTERNO
   private boolean encendido;
   private Banda banda;
 
