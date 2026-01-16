@@ -1,107 +1,202 @@
-public class RadioCarro {
-public class RadioCarro{
-private boolean encendido;
-private Banda banda;
-private int estacionAM;
-private double estacionFM;
-private int[] botonesAM;
-private double[] botonesFM;
+/**
+ * Implementación concreta de un radio de carro.
+ *
+ * <p>Maneja bandas AM/FM, estaciones actuales, avance por pasos y memoria de
+ * 12 botones por cada banda.</p>
+ */
+public class RadioCarro implements Radio{
 
-private static int AM_MIN = 530;
-private static int AM_MAX = 1700;
-private static int AM_STEP = 10;
-private static double FM_MIN = 87.9;
-private static double FM_MAX = 107.9;
-private static double FM_STEP = 0.2;
+  // ===== Constantes de AM =====
+  /** Mínimo permitido para AM. */
+  private static final int AM_MIN = 530;
 
-//Constructor
-RadioCarro() {
-    this.encendido = false;
-    this.banda = Banda.FM;
-    this.estacionAM = AM_MIN;
-    this.estacionFM = FM_MIN;
-    this.botonesAM = new int[12];
-    this.botonesFM = new double[12];
-}
+  /** Máximo permitido para AM. */
+  private static final int AM_MAX = 1610;
 
-void prenderRadio() {
-    this.encendido = true;
-}
+  /** Paso de avance para AM. */
+  private static final int AM_STEP = 10;
 
-void apagarRadio() {
-    this.encendido = false;
+  // ===== Constantes de FM =====
+  /** Mínimo permitido para FM. */
+  private static final double FM_MIN = 87.9;
 
-}
+  /** Máximo permitido para FM. */
+  private static final double FM_MAX = 107.9;
 
-void avanzarEstacion() {
-    if (this.banda == Banda.AM) {
-        this.estacionAM += AM_STEP;
-        if (this.estacionAM > AM_MAX) {
-            this.estacionAM = AM_MIN;
-        }
-    } else {
-        this.estacionFM += FM_STEP;
-        if (this.estacionFM > FM_MAX) {
-            this.estacionFM = FM_MIN;
-        }
+  /** Paso de avance para FM. */
+  private static final double FM_STEP = 0.2;
+
+  // ===== Estado =====
+  private boolean encendido;
+  private Banda banda;
+
+  private int estacionAm;
+  private double estacionFm;
+
+  private final int[] botonesAm;
+  private final double[] botonesFm;
+
+  /**
+   * Crea un radio inicializado en estado apagado.
+   *
+   * <ul>
+   *   <li>Banda por defecto: FM</li>
+   *   <li>AM inicia en 530</li>
+   *   <li>FM inicia en 87.9</li>
+   *   <li>Botones vacíos</li>
+   * </ul>
+   */
+  public RadioCarro() {
+    encendido = false;
+    banda = Banda.FM;
+
+    estacionAm = AM_MIN;
+    estacionFm = FM_MIN;
+
+    botonesAm = new int[12];
+    botonesFm = new double[12];
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void prenderRadio() {
+    encendido = true;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void apagarRadio() {
+    encendido = false;
+  }
+
+  /** {@inheritDoc} */
+  @Override
+  public void cambiarAM() {
+    if (!encendido) {
+      return;
     }
-}
+    banda = Banda.AM;
+  }
 
-void guardarEstacion(int numeroBoton){
-    if (this.banda == Banda.AM) {
-        this.botonesAM[numeroBoton] = this.estacionAM;
-    } else {
-        this.botonesFM[numeroBoton] = this.estacionFM;
+  /** {@inheritDoc} */
+  @Override
+  public void cambiarFM() {
+    if (!encendido) {
+      return;
     }
-}
+    banda = Banda.FM;
+  }
 
-void cargarEstacion(int numeroBoton){
-    if (this.banda == Banda.AM) {
-        this.estacionAM = this.botonesAM[numeroBoton];
-    } else {
-        this.estacionFM = this.botonesFM[numeroBoton];
+  /** {@inheritDoc} */
+  @Override
+  public void avanzarEstacion() {
+    if (!encendido) {
+      return;
     }
-}
 
-void cambiarFM() {
-    if (this.banda == Banda.AM) {
-        this.banda = Banda.FM;
+    if (banda == Banda.AM) {
+      avanzarAm();
     } else {
-        this.banda = Banda.AM;
+      avanzarFm();
     }
-}
+  }
 
-void cambiarAM(){
-    if (this.banda == Banda.FM) {
-        this.banda = Banda.AM;
+  /** {@inheritDoc} */
+  @Override
+  public void guardarEstacion(int numeroBoton) {
+    if (!encendido) {
+      return;
+    }
+
+    int idx = validarBoton(numeroBoton);
+    if (banda == Banda.AM) {
+      botonesAm[idx] = estacionAm;
     } else {
-        this.banda = Banda.FM;
+      botonesFm[idx] = estacionFm;
     }
-}
+  }
 
-public boolean getEncendido() {
-    return encendido;
-}
+  /** {@inheritDoc} */
+  @Override
+  public void cargarEstacion(int numeroBoton) {
+    if (!encendido) {
+      return;
+    }
 
-public Banda getBanda() {
-    return banda;
-}
-
-public int getEstacion() {
-    if (this.banda == Banda.AM) {
-        return estacionAM;
+    int idx = validarBoton(numeroBoton);
+    if (banda == Banda.AM) {
+      if (botonesAm[idx] != 0) {
+        estacionAm = botonesAm[idx];
+      }
     } else {
-        return (int) estacionFM;
+      if (botonesFm[idx] != 0.0) {
+        estacionFm = botonesFm[idx];
+      }
     }
-}
+  }
 
-public int[] getBotonesAM() {
-    return botonesAM;
-    
-}
+  /**
+   * Devuelve un texto amigable del estado del radio.
+   *
+   * <p>Útil para imprimir en consola sin agregar getters a la interfaz.</p>
+   *
+   * @return estado del radio (encendido/banda/estación)
+   */
+  public String estadoActual() {
+    if (!encendido) {
+      return "Radio apagado";
+    }
+    if (banda == Banda.AM) {
+      return "Encendido | AM | " + estacionAm;
+    }
+    return "Encendido | FM | " + estacionFm;
+  }
 
-public double[] getBotonesFM() {
-    return botonesFM;
-}
-}
+  // ===== Helpers privados =====
+
+  /**
+   * Avanza estación AM respetando límites y reinicio.
+   */
+  private void avanzarAm() {
+    estacionAm += AM_STEP;
+    if (estacionAm > AM_MAX) {
+      estacionAm = AM_MIN;
+    }
+  }
+
+  /**
+   * Avanza estación FM respetando límites y reinicio.
+   *
+   * <p>Se redondea a 1 decimal para evitar errores de punto flotante.</p>
+   */
+  private void avanzarFm() {
+    estacionFm = redondearAUnDecimal(estacionFm + FM_STEP);
+    if (estacionFm > FM_MAX) {
+      estacionFm = FM_MIN;
+    }
+  }
+
+  /**
+   * Valida que el número de botón esté entre 1 y 12.
+   *
+   * @param numeroBoton número de botón (1..12)
+   * @return índice basado en cero (0..11)
+   * @throws IllegalArgumentException si no está en el rango 1..12
+   */
+  private int validarBoton(int numeroBoton) {
+    if (numeroBoton < 1 || numeroBoton > 12) {
+      throw new IllegalArgumentException("El botón debe estar entre 1 y 12.");
+    }
+    return numeroBoton - 1;
+  }
+
+  /**
+   * Redondea un valor a 1 decimal.
+   *
+   * @param valor valor original
+   * @return valor redondeado a 1 decimal
+   */
+  private double redondearAUnDecimal(double valor) {
+    return Math.round(valor * 10.0) / 10.0;
+  }
 }

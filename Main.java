@@ -1,13 +1,13 @@
 import java.util.Scanner;
 
 /**
- * Antony Portillo 
- * Alejandro Rustrian 
+ * Antony Portillo
+ * Alejandro Rustrian
  * Clase principal (consola) para interactuar con el radio.
  *
  * <p>Depende de la interfaz {@link Radio} para reducir acoplamiento.
  * Cambiar la implementación debe requerir una sola línea.</p>
- * 
+ *
  *
  */
 public class Main {
