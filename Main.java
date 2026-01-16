@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
 /**
- * Clase principal (consola) para interactuar con el radio.
+ * HOJA DE TRABAJO 1 - ALGORITMOS Y ESTRUCTURAS DE DATOS 
+ * ANTONY PORTILLO 
+ * ALEJANDRO RUSTRIAN 
+ * 
+ *  Clase principal (consola) para interactuar con el radio 
  *
  * <p>Depende de la interfaz Radio.
  * </p>
@@ -23,7 +27,7 @@ public class Main {
    * Imprime el menú de opciones en consola.
    */
   public void mostrarMenu() {
-    System.out.println("\n===== RADIO CARRO =====");
+    System.out.println("\n--- RADIO CARRO --");
     System.out.println("1) Prender radio");
     System.out.println("2) Apagar radio");
     System.out.println("3) Cambiar a AM");
@@ -58,7 +62,7 @@ public class Main {
   }
 
   /**
-   * Punto de entrada del programa.
+   * Punto de entrada del programa :D
    *
    * @param args argumentos de línea de comandos
    */
@@ -66,7 +70,6 @@ public class Main {
     new Main().ejecutar();
   }
 
-  // ===== Helpers privados =====
 
   /**
    * Ejecuta la opción seleccionada por el usuario.
