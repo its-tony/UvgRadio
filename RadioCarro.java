@@ -1,5 +1,5 @@
 public class RadioCarro {
-    public class RadioCarro{
+public class RadioCarro{
 private boolean encendido;
 private Banda banda;
 private int estacionAM;
