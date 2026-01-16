@@ -3,8 +3,8 @@ import java.util.Scanner;
 /**
  * Clase principal (consola) para interactuar con el radio.
  *
- * <p>Depende de la interfaz {@link Radio} para reducir acoplamiento.
- * Cambiar la implementación debe requerir una sola línea.</p>
+ * <p>Depende de la interfaz Radio.
+ * </p>
  */
 public class Main {
 
@@ -13,7 +13,7 @@ public class Main {
   /**
    * Crea el programa principal con una implementación de radio.
    *
-   * <p>Para cambiar de implementación, reemplaza {@code new RadioCarro()}.</p>
+   *</p>
    */
   public Main() {
     radio = new RadioCarro();
@@ -109,7 +109,7 @@ public class Main {
   }
 
   /**
-   * Lee un entero desde consola, repitiendo si el usuario ingresa texto inválido.
+   * Lee un entero, repitiendo si el usuario ingresa texto inválido.
    *
    * @param scanner lector de entrada
    * @return entero ingresado
@@ -125,8 +125,8 @@ public class Main {
   /**
    * Imprime el estado del radio si la implementación lo soporta.
    *
-   * <p>Esto mantiene que {@code Main} trabaje con la interfaz {@link Radio},
-   * pero permite mostrar estado cuando la implementación es {@link RadioCarro}.</p>
+   * <p>Esto mantiene que Main trabaje con la interfaz Radio,
+   * pero permite mostrar estado cuando la implementación es RadioCarro.</p>
    */
   private void imprimirEstadoSiEsPosible() {
     if (radio instanceof RadioCarro) {
