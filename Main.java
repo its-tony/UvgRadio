@@ -1,14 +1,10 @@
 import java.util.Scanner;
 
 /**
- * Antony Portillo
- * Alejandro Rustrian
  * Clase principal (consola) para interactuar con el radio.
  *
  * <p>Depende de la interfaz {@link Radio} para reducir acoplamiento.
  * Cambiar la implementación debe requerir una sola línea.</p>
- *
- *
  */
 public class Main {
 
@@ -27,8 +23,8 @@ public class Main {
    * Imprime el menú de opciones en consola.
    */
   public void mostrarMenu() {
-    System.out.println("\n --- RADIO CARRO --- ");
-    System.out.println("1) Encender radio");
+    System.out.println("\n===== RADIO CARRO =====");
+    System.out.println("1) Prender radio");
     System.out.println("2) Apagar radio");
     System.out.println("3) Cambiar a AM");
     System.out.println("4) Cambiar a FM");
@@ -40,7 +36,7 @@ public class Main {
   }
 
   /**
-   * Ejecuta el ciclo principal del programa hasta que el usuario salga :D
+   * Ejecuta el ciclo principal del programa hasta que el usuario salga.
    */
   public void ejecutar() {
     Scanner scanner = new Scanner(System.in);
@@ -70,6 +66,7 @@ public class Main {
     new Main().ejecutar();
   }
 
+  // ===== Helpers privados =====
 
   /**
    * Ejecuta la opción seleccionada por el usuario.

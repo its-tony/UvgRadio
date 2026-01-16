@@ -4,7 +4,7 @@
  * <p>Maneja bandas AM/FM, estaciones actuales, avance por pasos y memoria de
  * 12 botones por cada banda.</p>
  */
-public class RadioCarro implements Radio{
+public class RadioCarro implements Radio {
 
   // ===== Constantes de AM =====
   /** Mínimo permitido para AM. */
