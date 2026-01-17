@@ -199,4 +199,15 @@ public class RadioCarro implements Radio {
   private double redondearAUnDecimal(double valor) {
     return Math.round(valor * 10.0) / 10.0;
   }
+  public Banda getBandaActual() {
+    return banda;
+    }
+
+  public double getEstacionActual() {
+    if (banda == Banda.AM) {
+        return estacionAm;
+    } else {
+        return estacionFm;
+    }
+  }
 }
