@@ -7,7 +7,7 @@ public class RadioCarroTest {
     public void testAvanzarEstacionAM() {
         RadioCarro radio = new RadioCarro();
         radio.prenderRadio();
-
+        radio.cambiarAM();
         radio.avanzarEstacion();
 
         assertEquals(540, radio.getEstacionActual());
