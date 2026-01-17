@@ -35,4 +35,13 @@ public class RadioCarroTest {
 
         assertEquals(88.1, radio.getEstacionActual());
     }
+    @Test
+    public void testNoAvanzaSiRadioEstaApagado() {
+    RadioCarro radio = new RadioCarro();
+
+    radio.avanzarEstacion();
+
+    assertEquals(87.9, radio.getEstacionActual());
+}
+
 }
